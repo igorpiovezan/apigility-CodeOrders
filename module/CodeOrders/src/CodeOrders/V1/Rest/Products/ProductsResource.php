@@ -29,6 +29,13 @@ class ProductsResource extends AbstractResourceListener
     public function create($data)
     {
 
+        $user = $this->repository->findByUsername($this->getIdentity()->getRoleId());
+
+        if ($user->getRole() == "salesman") {
+
+            return new ApiProblem(403, "The user has not access to this info");
+        }
+
         return $this->repository->create($data);
 
         //return new ApiProblem(405, 'The POST method has not been defined');
@@ -43,6 +50,14 @@ class ProductsResource extends AbstractResourceListener
     public function delete($id)
     {
 
+
+        $user = $this->repository->findByUsername($this->getIdentity()->getRoleId());
+
+        if ($user->getRole() == "salesman") {
+
+            return new ApiProblem(403, "The user has not access to this info");
+        }
+
         return $this->repository->delete($id);
         //return new ApiProblem(405, 'The DELETE method has not been defined for individual resources');
     }
@@ -55,6 +70,14 @@ class ProductsResource extends AbstractResourceListener
      */
     public function deleteList($data)
     {
+
+        $user = $this->repository->findByUsername($this->getIdentity()->getRoleId());
+
+        if ($user->getRole() == "salesman") {
+
+            return new ApiProblem(403, "The user has not access to this info");
+        }
+
         return new ApiProblem(405, 'The DELETE method has not been defined for collections');
     }
 
@@ -95,6 +118,13 @@ class ProductsResource extends AbstractResourceListener
     public function patch($id, $data)
     {
 
+        $user = $this->repository->findByUsername($this->getIdentity()->getRoleId());
+
+        if ($user->getRole() == "salesman") {
+
+            return new ApiProblem(403, "The user has not access to this info");
+        }
+
         return $this->repository->patch($id, $data);
         //return new ApiProblem(405, 'The PATCH method has not been defined for individual resources');
     }
@@ -107,6 +137,14 @@ class ProductsResource extends AbstractResourceListener
      */
     public function replaceList($data)
     {
+
+        $user = $this->repository->findByUsername($this->getIdentity()->getRoleId());
+
+        if ($user->getRole() == "salesman") {
+
+            return new ApiProblem(403, "The user has not access to this info");
+        }
+
         return new ApiProblem(405, 'The PUT method has not been defined for collections');
     }
 
@@ -119,6 +157,13 @@ class ProductsResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
+
+        $user = $this->repository->findByUsername($this->getIdentity()->getRoleId());
+
+        if ($user->getRole() == "salesman") {
+
+            return new ApiProblem(403, "The user has not access to this info");
+        }
 
         return $this->repository->update($id, $data);
         //return new ApiProblem(405, 'The PUT method has not been defined for individual resources');
